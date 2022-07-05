@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Youtube</title>
+    <link rel="stylesheet" href = "test.css">
+</head>
+<body>
+    <body style="background-color:rgba(0,0,0,0.05)"></body>
+    <nav class="flex-div">
+        <img src="photos/logo.png" class = "img_logo" >
+        <div class="search-field">
+            <input type="search" value="" id="search" placeholder="Search" onchange="OpenPage()">
+            
+        </div>
+        <button class="SearchBtn">
+            <img src="photos/search.png" class="img_search" onclick="OpenPage()" >
+        </button>
+        <div class="dropdown">
+            <button class="dropbtn" onclick="myFunction()">
+                <img src="photos/avatar.jpg" class="img_avatar">
+            </button>
+            <div id="myDropdown" class="dropdown-content">
+              <img src="photos/avatar.jpg" class="img_avatar">John Doe
+              <button onclick="alert1()"> Your Channel </button>
+              <button onclick="alert2()">   Purchaces  </button>
+              <button onclick="alert3()">Switch Account</button>
+              <button onclick="alert4()">   Settings   </button>
+              <button onclick="alert5()">     Help     </button>
+            </div>
+        </div>
+    </nav>
+    <div class="video-panel">
+        <iframe class ="vid" src="https://www.youtube.com/embed/vOWHDQU46NU?autoplay=1&mute=1">
+        </iframe>
+        <div class="video-sidebar">
+            <h2>Related Videos</h2>
+            <button class="box" onclick ="OpenVideo(2)">
+                <img src="photos/ice_age2.jpg" class="vid1">
+                <b style="margin-left:10px"  id="name2">Ice Age 2</b>
+                <p id="views2" >150 views </p>
+            </button>
+            <button class="box2" onclick ="OpenVideo(3)">
+                <img src="photos/ice_age3.jpg" class="vid2">
+                <b style="margin-left:6px" id = "name3">Ice Age 3</b>
+                <p style="margin-top:10px" id = "views3" >2000 views </p>
+            </button>
+            <button class="box3" onclick ="OpenVideo(4)">
+                <img src="photos/ice_age4.jpg" class="vid3">
+                <b style="margin-left:6px" id= "name4">Ice Age 4</b>
+                <p style="margin-right:10px" id ="views4"> 432 views </p>
+            </button>
+        </div>
+    </div>
+    <h1></h1>
+    <b style="margin-left:35px" id="name1" >Ice Age 1</b>
+    <p style="margin-left:35px" id= "views1">1000 views</p>
+    <script>
+        var data=[150,2000,432,5620,3040,2020];
+        function OpenPage(){
+            var x = document.getElementById("search").value;
+            
+            if (x==="ice age"){
+                for(var i=2;i<=4;i++){
+                    document.getElementById("name"+i).textContent="Ice Age "+i;     
+                    document.getElementsByClassName("vid"+(i-1))[0].src="photos/ice_age"+i+".jpg";  
+                    document.getElementById("views"+i).textContent=data[i-2]+ " views";
+                }
+            }
+            else if (x==="matrix"){
+                for(var i=1;i<=3;i++){
+                    document.getElementsByClassName("vid"+i)[0].src="photos/matrix"+i+".jpg";
+                    document.getElementById("name"+(i+1)).textContent="Matrix "+i;  
+                    document.getElementById("views"+(i+1)).textContent=data[i+2]+" views";
+                } 
+            }
+            else{
+                alert("Your search did not match any videos!");
+            }
+        }
+
+        function OpenVideo(a){
+            var names=["Ice Age 2","Ice Age 3", "Ice Age 4", "Matrix 1","Matrix 2", "Matrix 3"]
+            var links=["WHe9fY3K314","WHe9fY3K314","WUpSXOA6xiY","Dyxo6gPArP4","kYzz0FSgpSU","hMbexEPAOQI"]
+            var NextVid=document.getElementById("name"+a).textContent;
+            for (var i=0;i<names.length;i++){
+                if (NextVid===names[i]){
+                    document.getElementsByClassName("vid")[0].src="https://www.youtube.com/embed/"+links[i]+"?autoplay=1&mute=1";
+                    document.getElementById("name1").textContent=NextVid;
+                    document.getElementById("views1").textContent=data[i]+1+ " views";
+                    data[i]=data[i]+1;
+                    document.getElementById("views"+a).textContent=data[i]+" views";
+                }
+            }
+            
+        }
+
+        function alert1(){alert("Your Channel")}
+        function alert2(){alert("Purchases")}
+        function alert3(){alert("Switch Account")}
+        function alert4(){alert("Settings")}
+        function alert5(){alert("Help")}
+
+        
+    </script>
+    <script>
+        function myFunction() {
+            document.getElementById("myDropdown").classList.toggle("show");
+        }
+    </script>
+</body>
+</html>
